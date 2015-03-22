@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MicroMarketEditDlg" widgetVar="MicroMarketEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMicroMarketTitle}">
+            <h:form id="MicroMarketEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{microMarketController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMicroMarketLabel_zipCode}" for="zipCode" />
+                        <p:inputText id="zipCode" value="#{microMarketController.selected.zipCode}" title="#{bundle.EditMicroMarketTitle_zipCode}" required="true" requiredMessage="#{bundle.EditMicroMarketRequiredMessage_zipCode}"/>
+                        <p:outputLabel value="#{bundle.EditMicroMarketLabel_radius}" for="radius" />
+                        <p:inputText id="radius" value="#{microMarketController.selected.radius}" title="#{bundle.EditMicroMarketTitle_radius}" />
+                        <p:outputLabel value="#{bundle.EditMicroMarketLabel_areaLength}" for="areaLength" />
+                        <p:inputText id="areaLength" value="#{microMarketController.selected.areaLength}" title="#{bundle.EditMicroMarketTitle_areaLength}" />
+                        <p:outputLabel value="#{bundle.EditMicroMarketLabel_areaWidth}" for="areaWidth" />
+                        <p:inputText id="areaWidth" value="#{microMarketController.selected.areaWidth}" title="#{bundle.EditMicroMarketTitle_areaWidth}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{microMarketController.update}" value="#{bundle.Save}" update="display,:MicroMarketListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MicroMarketEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MicroMarketEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

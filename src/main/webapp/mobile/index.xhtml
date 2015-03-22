@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <f:metadata>
+        <f:viewAction action="#{mobileNavigationController.initMobile}"/>
+    </f:metadata>
+    <ui:composition template="mobile_template.xhtml">
+        <ui:define name="body">
+            <pm:page id="customerListing">
+                <pm:header>
+                    Acme Pools Customer Listing
+                </pm:header>
+                <pm:content>
+                    <h:form id="indexForm">
+                        <p:panel header="Acme Pools Customer Listing">
+                            <p:dataList id="datalist" value="#{customerController.items}"
+                                        var="item" pt:data-filter="true">
+                                <p:commandLink action="#{customerController.loadCustomer}"
+                                               update=":customerInfo:customerInfoPanel">
+                                    <f:param name="customer" value="#{item.customerId}"/>
+                                    <h:panelGroup>
+
+                                        <h:outputText value="#{item.customerId} - #{item.name}"/>
+
+                                        <br/>
+                                        <h:outputText value="#{item.email}"/>
+
+                                    </h:panelGroup>
+                                </p:commandLink>
+                            </p:dataList>
+                        </p:panel>
+                    </h:form>
+                </pm:content>
+                <pm:footer fixed="true">
+                    <ui:include src="menu.xhtml"/>
+                </pm:footer>
+            </pm:page>
+            <pm:page id="customerInfo">
+                <pm:header>
+                    Acme Pools
+                </pm:header>
+                <pm:content>
+                    <p:panel id="customerInfoPanel" header="Acme Pools Customer Information">
+                        <h:form id="customerInfoForm">
+                            <p:growl id="messages"/>
+                            <h:panelGrid columns="2">
+                                <p:outputLabel for="name" value="Name: "/>
+                                <p:inputText id="name" value="#{customerController.selected.name}"/>
+
+                                <p:outputLabel for="addressLine1" value="Address 1: "/>
+                                <p:inputText id="addressLine1" value="#{customerController.selected.addressline1}"/>
+
+                                <p:outputLabel for="addressLine2" value="Address 2: "/>
+                                <p:inputText id="addressLine2" value="#{customerController.selected.addressline2}"/>
+
+                                <p:outputLabel for="phone" value="Phone: "/>
+                                <p:inputText id="phone" value="#{customerController.selected.phone}"/>
+
+                            </h:panelGrid>
+                            <p:commandButton value="Save" icon="ui-icon-disk" iconPos="top"
+                                             action="#{customerController.mobileUpdate}"
+                                             ajax="false"/>
+
+                            <p:commandLink action="pm:customerListing?transition=fade" value="Go Back"/>
+                        </h:form>
+                    </p:panel>
+                </pm:content>
+                <pm:footer fixed="true">
+                    <ui:include src="menu.xhtml"/>
+                </pm:footer>
+            </pm:page>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

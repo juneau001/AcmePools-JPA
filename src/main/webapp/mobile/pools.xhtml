@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+        <ui:composition template="mobile_template.xhtml">
+        <ui:define name="body">
+            <pm:page>
+                <pm:header>
+                </pm:header>
+                <pm:content>
+                    Pools Content
+                    <f:view>
+
+
+                        <h:form>
+                            <h1><h:outputText value="Create/Edit"/></h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Id:" for="id" />
+                                <p:inputText id="id" value="#{poolController.selected.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
+                                <p:outputLabel value="Style:" for="style" />
+                                <p:inputText id="style" value="#{poolController.selected.style}" title="Style" />
+                                <p:outputLabel value="Shape:" for="shape" />
+                                <p:inputText id="shape" value="#{poolController.selected.shape}" title="Shape" />
+                                <p:outputLabel value="Length:" for="length" />
+                                <p:inputText id="length" value="#{poolController.selected.length}" title="Length" />
+                                <p:outputLabel value="Width:" for="width" />
+                                <p:inputText id="width" value="#{poolController.selected.width}" title="Width" />
+                                <p:outputLabel value="Radius:" for="radius" />
+                                <p:inputText id="radius" value="#{poolController.selected.radius}" title="Radius" />
+                                <p:outputLabel value="Gallons:" for="gallons" />
+                                <p:inputText id="gallons" value="#{poolController.selected.gallons}" title="Gallons" />
+                            </p:panelGrid>
+                        </h:form>
+
+                    </f:view>
+
+                </pm:content>
+                <pm:footer fixed="true">
+                    <ui:include src="menu.xhtml"/>
+                </pm:footer>
+            </pm:page>
+        </ui:define>
+
+    </ui:composition>
+</html>
+
